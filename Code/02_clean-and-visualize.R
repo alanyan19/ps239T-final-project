@@ -1,3 +1,6 @@
+#Alan Yan
+#12-9-2016
+'''This code will clean the profession column of the Vote Smart API candidate bios data. I will first create a corpus, and then follow the standard text analysis procedure to clean the corpus for visualization. I decided to make a word cloud to quickly visualize the data. There is still a lot of cleaning that needs to go into perfecting the profession column. However, the word cloud will give a quick answer to what profession occurs most often. Finally, I have included code for saving the word cloud.'''
 rm(list=ls())
 setwd(dir = "your path")
 #install packages: "tm", "wordcloud", "dplyr" if you have not already
@@ -5,13 +8,9 @@ library(dplyr)
 library(tm)
 library(wordcloud)
 #this is the data I got from the Vote Smart API
-#when you look at my directory, this data is incomplete because I belieave
+#when you look at my directory, this data is incomplete because I believe
 #it would be unfair for me to post their API data publicly
 vote_smart_data <- read.csv(file="Your data file")
-#I made some initial crosstabs of states and gender just practice some basic visualizations
-gender_state_tab <- table(vote_smart_data$gender,vote_smart_data$homeState)
-gender_state_tab
-round(prop.table(gender_state_tab,2),2)
 #I'm first creating a corpus to create a wordcloud
 #I chose to use "VectorSource" and referenced directly from the original dataframe
 profession_corp <- Corpus(VectorSource(vote_smart_data$profession))
@@ -37,16 +36,7 @@ profession_corp <- tm_map(profession_corp,removeWords,c("former","united","prese
 profession_clean <- tm_map(profession_corp, PlainTextDocument)
 #this creates the wordcloud
 wordcloud(profession_clean, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+#this saves the word cloud 
 png("ProfessionWordcloud.png", width=12, height=8, units="in", res=300)
 wordcloud(profession_clean, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
-dev.off()
-warnings()
-#these are my initial code for understanding how to group and standardize profession
-#I first created a subset with only candidates with the profession column filled
-vote_smart_data.sub <- subset(vote_smart_data,vote_smart_data$profession != "")
-#second, I took a random sample of 250 of these candidates so I can have 
-#a manageable dataset. I'm going to learn from the sample to 
-#learn how to best standardize the profession column
-profession_sample <- vote_smart_data.sub[sample(nrow(vote_smart_data.sub),250),]
-
 
