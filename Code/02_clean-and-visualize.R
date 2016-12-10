@@ -4,6 +4,9 @@
 rm(list=ls())
 setwd(dir = "your path")
 #install packages: "tm", "wordcloud", "dplyr" if you have not already
+install.packages("tm")
+install.packages("dplyr")
+install.packages("wordcloud")
 library(dplyr)
 library(tm)
 library(wordcloud)
