@@ -11,8 +11,6 @@ For the second part of my project, I used Qualtrics to design a survey that will
 
 ## Files
 
-List all other files contained in the repo, along with a brief description of each one, like so:
-
 #### Data
 
 1. CandidateBios.csv: The first ten candidates returned from the Vote Smart API using my API code.
