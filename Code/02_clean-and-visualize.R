@@ -42,4 +42,4 @@ wordcloud(profession_clean, scale=c(5,0.5), max.words=100, random.order=FALSE, r
 #this saves the word cloud 
 png("c:/Users/Alan/ps239T-final-project/Results/ProfessionWordcloud.png", width=12, height=8, units="in", res=300)
 wordcloud(profession_clean, scale=c(5,0.5), max.words=100, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
-
+dev.off()
