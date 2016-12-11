@@ -13,7 +13,7 @@ library(wordcloud)
 #this is the data I got from the Vote Smart API
 #when you look at my directory, this data is incomplete because I believe
 #it would be unfair for me to post their API data publicly
-vote_smart_data <- read.csv(file="Your data file")
+vote_smart_data <- read.csv(file="c:/Users/Alan/ps239T-final-project/Data/CandidateBios.csv")
 #I'm first creating a corpus to create a wordcloud
 #I chose to use "VectorSource" and referenced directly from the original dataframe
 profession_corp <- Corpus(VectorSource(vote_smart_data$profession))
