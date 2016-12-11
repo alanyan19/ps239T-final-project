@@ -47,7 +47,7 @@ List all other files contained in the repo, along with a brief description of ea
 
 #### Results
 
-1. Profession_Wordcloud.png: wordcoud visualization of the profession data
+1. Profession_Wordcloud.png: wordcloud visualization of the profession data
 
 ## More Information
 
