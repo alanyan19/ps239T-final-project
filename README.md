@@ -1,19 +1,55 @@
-#PS239T Final Project: The Vote Smart API and Naturally Evaluating Digital Ads
+## Short Description
 
-My final project is divided into two parts, acquiring and visualizing the Vote Smart API’s profession data with Python and R, respectively, and a Qualtrics survey for evaluating digital ads. 
+For my final project, I did small parts of two projects. First the first portion of my project, I wrote a Python script to access the Vote Smart API candidates bios, nesting a for loop and the __getattribute__ method inside of a try and except framework. I included only the first ten entries of the data in the results file instead of the full dataset because it would be unfair for me to post their data for free online. However, I have included a failed candidates ID list, so for anyone who wants to rerun the code, they can skip those broken IDs. I was specifically interested in the profession data, so I used R to create and clean the corpus of the profession data column. I saved a wordcloud visualization of the profession data in the results folder.
 
-I wrote an API code that requests information from Vote Smart’s API and returns information on candidates’ profession, education, etc. Then, I visualize the profession data using a wordcloud to find the most commonly used professions. These data will be integrated in a model to see if profession has any relationship with the performance of a candidate. Originally, I was interested in using this API to collect contact information on each state legislator so I could replicate David Broockman and Daniel Butler’s paper investigating the prevalence of racial discrimination among state legislators, so Gabe sent me a copy of their code. After looking at their code, I went in a different direction, using for loops and the __getattribute__ method, while still keeping their try and except structure. 
+For the second part of my project, I used Qualtrics to design a survey that will test people's knowledge and tag a Facebook pixel on them. The layout of the survey is in the code directory with the questions. Gabe and I just finished our trial run on MTurk but I do not want to post the data because we promised respondents that the data would be "stored in a secure location," and therefore, I think they have a reasonable expectation that it will not be public.
 
-Broockman’s program tries every candidate ID, and if the candidate ID succeeds, then it tries requesting every attribute individually, and if the attribute exists, then it is written directly into a pre-created CSV file. If the candidate ID fails, then the program will skip that candidate ID and record the failed candidate ID in a separate CSV sheet. If an attribute does not exist, then the code skips that attribute and writes a semicolon to separate the data into columns. Broockman’s approach works, but it is inefficient and wordy.
+## Dependencies
 
-My approach to the code utilizes the for loop structure and the __getattribute__ method, while keeping the try and except framework of Broockman’s program. First, I used a try and except structure that tries each candidate ID, and if the candidate ID succeeds, then it passes into the for loop, however, if it fails, then it is recorded in another CSV for recording failed candidate IDs. The for loop has a try and except approach nested within it that tries every attribute by referencing a list that has a list of every attribute. If the attribute exists for the candidate, then it is recorded in a CSV, and if it does not exist, then a comma is inserted to create a placeholder for the attribute’s respective CSV column. 
+1. R, version 3.3.1
+2. Python, version 2.7, Anaconda distribution.
 
-Next, I used R to visualize the most commonly used words to describe professions in the profession column of the dataset. I used the packages dplyr, tm, and wordcloud to create a wordcloud to best visualize the most frequently used words. Unsurprisingly, the most common word, once I removed common words like “united,” “states,” “former,” etc., was “attorney.” The next steps are to standardize each profession for easier analysis. In addition, using the candidate’s profession, I want to code each candidate as working for a specific industry to make categorization easier. This may require machine learning because basic text analysis techniques have not yielded the necessary results.
+## Files
 
-The Vote Smart API I requested is not uploaded here because I believe it would be unfair for me to post their data for free online. I have instead posted the first ten lines of the data. There are 176,000 candidates in total so this is far from complete. I strongly recommend anyone interested in their data to buy an API key and use my code to access their data. 
+List all other files contained in the repo, along with a brief description of each one, like so:
 
-On the second part of my final project, I used Qualtrics as a tool to find subjects for Gabe and my project on evaluating the effect of digital ads more naturally and cheaply. Evaluating the effects of digital ads are incredibly expensive due to the large sample sizes need to find an effect. An associate at the Democratic digital ad firm DSPolitical estimated Gabe and I would need a sample size of at least five thousand subjects in order to find an effect because they had not found a way to matchback each individual. Gabe and I found a different way to evaluate the efficacy of digital ads without needing as large of a sample size.
+#### Data
 
-We use Facebook pixels that track users and populate our respective ad accounts with subjects so we can treat them with digital ads. I embedded Gabe’s and my Facebook pixels, written in HTML, into the survey, and we randomly assigned each subject to either pixel. When a subject takes the survey, they are automatically added to either Gabe’s or my pixel population, where we can treat them with digital ads afterwards. This treatment is more natural because subjects do not know that they are being treated with our digital ads as they scroll through Facebook. We ask each subject to answer a series of political knowledge questions to establish a base level of knowledge.
+1. CandidateBios.csv: The first ten candidates returned from the Vote Smart API using my API code.
+    - *Candidate ID*: The Vote Smart assigned ID of each candidate
+    - *crpID*: The Open Secrets assigned ID of each candidate in Open Secret's database
+    - *firstName*: The candidate's first name
+    - *nickName*: The candidate's nickname
+    - *middleName*: The candidate's middle name
+    - *lastName*: The candidate's last name
+    - *suffix*: The candidate's suffix
+    - *birthDate*: The candidate's date of birth
+    - *birthPlace*: The candidate's place of birth
+    - *pronunciation*: The candidate's name's pronunciation
+    - *gender*: The candidate's gender
+    - *family*: The candidate's family members
+    - *homeCity*: The candidate's home city
+    - *homeState*: The candidate's home state
+    - *education*: The candidate's education
+    - *profession*: The candidate's professional experience
+    - *political*: The candidate's political experience
+    - *religion*: The candidate's professed religion
+    - *congMembership*: The candidate's bureaucratic experience
+    - *orgMembership*: The candidate's organization memberships
+    - *specialMsg*: Any extra information on the candidate
+2. FailedCandidateBios.csv: The list of candidate IDs that did not work
+    
+#### Code
 
-Later on, we will resurvey them to see if people answer political knowledge questions more accurately to assess if our ads worked. If we can find an effect with our smaller sample size, then we will make assessing digital appeals more accessible for academics and researchers, who may not have the funds to test their ads on sample sizes suggested by our friend at DSPolitical.
+1. 01_collect_data.ipynb: collects Vote Smart API data 
+2. 02_clean-and-visualize.R: cleans profession data, creates corpus, visualizes wordcloud
+3. 03_Qualtrics_survey.pdf: layout of Qualtrics survey on digital ads
+
+#### Results
+
+1. Profession_Wordcloud.png: wordcoud visualization of the profession data
+
+## More Information
+
+If you have any questions or comments, email me at alanyan@berkeley.edu.
+
